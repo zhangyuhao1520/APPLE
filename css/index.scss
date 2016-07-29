@@ -1,0 +1,863 @@
+body, h1, h2, h3, h4, h5, h6, p, pre, ul, ol, li, dl, dt, dd, form, input, textarea, select, option {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: none;
+}
+@font-face{
+	font-family:"MyFont_pro_thin";
+	src:url(../fonts/myriad-set-pro_thin.woff) format('woff');
+}
+@font-face{
+	font-family:"MyFont_pro_text";
+	src:url(../fonts/myriad-set-pro_text.woff) format('woff');
+}
+@font-face{
+	font-family:"MyFont_pro_bold";
+	src:url(../fonts/myriad-set-pro_semibold.woff) format('woff');
+}
+@font-face{
+	font-family:"MyFont_pro_extrathin";
+	src:url(../fonts/myriad-set-pro_extrathin.woff) format('woff');
+}
+@font-face{
+	font-family:"MyFont_thin";
+	src:url(../fonts/appleicons_thin.woff) format('woff');
+}
+*{
+	font-family:"MyFont_thin","MyFont_pro_thin","MyFont_pro_text",""MyFont_pro_bold"","MyFont_pro_extrathin","微软雅黑","宋体","Arial";
+	font-size:14px;
+	colorr:#333;
+	box-sizing:border-box;
+}
+.row{
+	position:relative;
+	&::after{
+		content:'';
+		display:block;
+		clear:both;
+		line-height:0;
+		height:0;
+	}
+}
+.col{
+	position:relative;
+	float:left;
+	min-height:1px;
+}
+$number:20;
+$large_size:3000px;
+$medium_size:1068px;
+$small_size:736px;
+
+$list:(
+	'l':$large_size,
+	'm':$medium_size,
+	's':$small_size,
+);
+@each $d in map_keys($list){
+	@media screen and (max-width:map_get($list,$d)){
+		@for $i from 1 through $number{
+			.col.#{$d}#{$i}{
+				width:percentage($i/$number);
+			}
+		}
+	}
+}
+
+@mixin onlarge{
+	@media screen and (max-width:$large-size){
+		@content;
+	}
+}
+@mixin onmedium{
+	@media screen and (max-width:$medium-size){
+		@content;
+	}
+}
+@mixin onsmall{
+	@media screen and (max-width:$small-size){
+		@content;
+	}
+}
+
+.container{
+	margin:0 auto;
+	@include onlarge{
+		width:100%;
+	}
+	@include onmedium{
+		width:100%;
+	}
+	@include onsmall{
+		width:100%;
+	}
+}
+@mixin v-align{
+	position:absolute;
+	top:0;
+	bottom:0;
+	margin:auto;
+}
+@mixin c-align{
+	position:absolute;
+	left:0;
+	right:0;
+	margin:auto;
+}
+@mixin cv-align{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
+}
+
+
+.header{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	background:rgba(0,0,0,0.8);
+	font-size:18px;
+	height:48px;
+	max-height:44px;
+	z-index:1;
+	.header-inner{
+		height:44px;
+		max-width:1024px;
+		margin:0 auto;
+		padding:0 15px;
+		.nav{
+			text-align:justify;
+			li{
+				padding:0 16px;
+				display:inline-block;
+				height:44px;
+				&:hover{
+					opacity:0.7;
+				}
+				cursor:pointer;
+			}
+			span{
+				font-size:0;
+			}
+			&::after{
+				content:'';
+				display:inline-block;
+				height:0px;
+				line-height:0;
+				opacity:0;
+				width:100%;
+			}
+			.logo{
+				background:url(../img/logo.svg);
+				background-position:center center;
+				background-size:20px 44px;
+				width:20px;
+				background-repeat:no-repeat;
+			}
+			.mac{
+				background:url(../img/mac.svg);
+				background-position:center center;
+				background-size:31px 44px;
+				background-repeat:no-repeat;
+			}
+			.ipad{
+				background:url(../img/ipad.svg);
+				background-position:center center;
+				background-size:30px 44px;
+				background-repeat:no-repeat;
+			}
+			.iphone{
+				background:url(../img/iphone.svg);
+				background-position:center center;
+				background-size:48px 44px;
+				background-repeat:no-repeat;
+				width:3.2em;
+			}
+			.watch{
+				background:url(../img/watch.svg);
+				background-position:center center;
+				background-size:44px 44px;
+				background-repeat:no-repeat;
+				width:2.8em;
+			}
+			.music{
+				background:url(../img/music.svg);
+				background-position:center center;
+				background-size:40px 44px;
+				background-repeat:no-repeat;
+				width:2.7em;
+			}
+			.support{
+				background:url(../img/support.svg);
+				background-position:center center;
+				background-size:57px 44px;
+				background-repeat:no-repeat;
+				width:3.7em;
+			}
+			.search{
+				background:url(../img/search.svg);
+				background-position:center center;
+				background-size:20px 44px;
+				background-repeat:no-repeat;
+				width:20px;
+			}
+			.shop{
+				background:url(../img/bag.svg);
+				background-position:center center;
+				background-size:18px 44px;
+				background-repeat:no-repeat;
+				width:18px;
+			}
+		}
+	}
+}
+.header .header-innerSmall{
+	height:44px;
+	max-width:736px;
+	margin:0 auto;
+	padding:0 4px;
+	.nav{
+		text-align:justify;
+		li{
+			padding:0 16px;
+			display:inline-block;
+			height:44px;
+			&:hover{
+				opacity:0.7;
+			}
+			cursor:pointer;
+		}
+		span{
+			font-size:0;
+		}
+		&::after{
+			content:'';
+			display:inline-block;
+			height:0px;
+			line-height:0;
+			opacity:0;
+			width:100%;
+		}
+		.list{
+			width:20px;
+			.heng1{
+				position:absolute;
+				top:18px;
+				width:17px;
+				height:1px;
+				background:#fff;
+				transition:all 0.6s ease;
+			}
+			.heng2{
+				position:absolute;
+				bottom:18px;
+				width:17px;
+				height:1px;
+				background:#fff;
+				transition:all 0.6s ease;
+			}
+		}
+		.list_tab{
+			width:100%;
+			position:absolute;
+			top:44px;
+			left:0;
+			height:0;
+			background:#000;
+			padding:0 60px;
+			opacity:0;
+			li{
+				height:44px;
+				width:100%;
+				&:hover{
+					opacity:0.7;
+				}	
+			}
+			.mac1{
+				margin-top:20px;
+				background:url(../img/mac.svg);
+				background-position:0 center;
+				background-size:40px;
+				background-repeat:no-repeat;
+				border-bottom:1px solid rgba(255,255,255,0.4);
+			}
+			.ipad1{
+				background:url(../img/ipad.svg);
+				background-position:0 center;
+				background-size:40px;
+				background-repeat:no-repeat;
+				border-bottom:1px solid rgba(255,255,255,0.4);
+			}
+			.iphone1{
+				background:url(../img/iphone.svg);
+				background-position:0 center;
+				background-size:58px;
+				background-repeat:no-repeat;
+				border-bottom:1px solid rgba(255,255,255,0.4);
+			}
+			.watch1{
+				background:url(../img/watch.svg);
+				background-position:0 center;
+				background-size:54px;
+				background-repeat:no-repeat;
+				border-bottom:1px solid rgba(255,255,255,0.4);
+			}
+			.music1{
+				background:url(../img/music.svg);
+				background-position:0 center;
+				background-size:50px;
+				background-repeat:no-repeat;
+				border-bottom:1px solid rgba(255,255,255,0.4);
+			}
+			.support1{
+				background:url(../img/support.svg);
+				background-position:0 center;
+				background-size:67px;
+				background-repeat:no-repeat;
+				border-bottom:1px solid rgba(255,255,255,0.4);
+			}
+			.search1{
+				background:url(../img/search.svg);
+				background-position:0 center;
+				background-size:30px;
+				background-repeat:no-repeat;
+				border-bottom:1px solid #fff;
+				cursor:normal;
+				&:hover{
+					opacity:1;
+				}
+			}
+		}
+		.list.change{
+			.heng1{
+				top:22px;
+				transform:rotateZ(135deg);
+			}
+			.heng2{
+				bottom:21px;
+				transform:rotateZ(45deg);
+			}
+		}
+		.logo{
+			background:url(../img/logo.svg);
+			background-position:center center;
+			background-size:20px 44px;
+			width:20px;
+			background-repeat:no-repeat;
+		}
+		.shop{
+			background:url(../img/bag.svg);
+			background-position:center center;
+			background-size:18px 44px;
+			background-repeat:no-repeat;
+			width:18px;
+		}
+	}
+}
+.banner{
+	position:absolute;
+	top:0;
+	left:0;
+	height:650px;
+	width:100%;
+	overflow:hidden;
+	cursor:pointer;
+	&:hover .btnBox .btnLeft{
+		opacity:1;
+	}
+	&:hover .btnBox .btnRight{
+		opacity:1;
+	}
+	.btnBox{
+		position:absolute;
+		top:0;
+		width:100%;
+		height:100%;
+		@include onsmall{
+			height:455px;
+		}
+		.pointList{
+			position:absolute;
+			bottom:10px;
+			left:47%;
+			width:62px;
+			@include onsmall{
+				left:45%;
+			}
+			li{
+				width:8px;
+				height:8px;
+				border-radius:50%;
+				margin-right:10px;
+				background:#000;
+				z-index:10;
+				float:left;
+				&:nth-of-type(4){
+					margin-right:0;
+				}
+			}
+		}
+		.btnLeft{
+			position:absolute;
+			top:45%;
+			left:0;
+			font-size:60px;
+			margin:0 0 0 40px;
+			width:50px;
+			height:120px;
+			background:url(../img/btnl.png) no-repeat;
+			opacity:0;
+			transition:all 0.6s ease;
+			cursor:pointer;
+		}
+		.btnRight{
+			position:absolute;
+			top:45%;
+			right:0;
+			font-size:60px;
+			margin:0 40px 0 0;
+			width:50px;
+			height:120px;
+			background:url(../img/btnr.png) no-repeat;
+			opacity:0;
+			cursor:pointer;
+		}
+	}
+	.inner{
+		position:absolute;
+		top:0;
+		left:0;
+		bottom:auto;
+		right:auto;
+		width:100%;
+		overflow:hidden;
+		vertical-align:middle;
+		.bannerImg{
+			a{
+				display:block;
+				height:650px;
+				.img{
+					position:absolute;
+				}
+				.img1{
+					background:url(../img/macbook_medium.png) no-repeat center center;
+					background-size:692px 247px;
+					height:247px;
+					bottom:120px;
+					@include onlarge{
+						width:100%;
+					}
+					@include onmedium{
+						width:100%;
+					}
+					@include onsmall{
+						width:100%;
+						background-size:350px;
+						max-width:760px;
+						height:455px;
+						bottom:100px;
+					}
+				}
+				.img2{
+					background:url(../img/iphone_6s_medium.jpg) no-repeat center center;
+					background-size:1400px 389px;
+					height:389px;
+					bottom:10px;
+					@include onlarge{
+						width:100%;
+					}
+					@include onmedium{
+						width:100%;
+					}
+					@include onsmall{
+						width:100%;
+						background-size:500px;
+						max-width:760px;
+						bottom:100px;
+						height:455px;
+					}
+				}
+				.img3{
+					background:url(../img/apple_watch_trio_medium.jpg) no-repeat center center;
+					background-size:671px 341px;
+					height:341px;
+					bottom:60px;
+					@include onlarge{
+						width:100%;
+					}
+					@include onmedium{
+						width:100%;
+					}
+					@include onsmall{
+						width:100%;
+						background-size:350px;
+						max-width:760px;
+						bottom:120px;
+						height:455px;
+					}
+				}
+				.img4{
+					background:url(../img/ipad_pro_family_medium.jpg) no-repeat center center;
+					background-size:1310px 542px;
+					height:542px;
+					bottom:-120px;
+					@include onlarge{
+						width:100%;
+					}
+					@include onmedium{
+						width:100%;
+					}
+					@include onsmall{
+						width:100%;
+						height:455px;
+						background-size:450px;
+						max-width:760px;
+						bottom:60px;
+					}
+				}
+				.bannerText{
+					position:absolute;
+					top:140px;
+					text-align:center;
+					@include onlarge{
+						width:100%;
+					}
+					@include onmedium{
+						width:100%;
+					}
+					@include onsmall{
+						width:100%;
+					}
+					h2{
+						font-size:52px;
+						font-weight:normal;
+						font-family:"MyFont_pro_thin";
+						color:#000;
+					}
+					h3{
+						font-size:26px;
+						font-weight:normal;
+						font-family:"微软雅黑";
+						color:#333;
+						margin-top:6px;
+						@include onsmall{
+							width:100%;
+							font-size:18px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.inner2 span{
+		display:block;
+		background:url(../img/iphone_6s_medium.png) no-repeat center center;
+		background-size:205px 40px;
+		width:1400px;
+		height:40px;
+		@include onlarge{
+			width:100%;
+		}
+		@include onmedium{
+			width:100%;
+		}
+		@include onsmall{
+			width:100%;
+		}
+	}
+	.inner3 span{
+		display:block;
+		background:url(../img/apple_watch_medium.png) no-repeat center center;
+		background-size:184px 40px;
+		width:1400px;
+		height:40px;
+		@include onlarge{
+			width:100%;
+		}
+		@include onmedium{
+			width:100%;
+		}
+		@include onsmall{
+			width:100%;
+		}
+	}
+	#inner4Text{
+		top:80px;
+		@include onsmall{
+			top:140px;
+		}
+	}
+}
+.product{
+	width:100%;
+	min-height:1;
+	position:relative;
+	top:650px;
+	left:0;
+	@include onsmall{
+		top:455px;
+	}
+	.productInner{
+		min-height:200px;
+		overflow:hidden;
+		a{
+			display:block;
+			cursor:pointer;
+			width:100%;
+			height:100%;
+			border-right:2px solid #fff;
+			border-top:2px solid #fff;
+			@include onlarge{
+				&:nth-of-type(4){
+					border-right:none;
+				}
+			}
+			@include onmedium{
+				border-top:1px solid #fff;
+				border-right:1px solid #fff;
+			}
+			@include onsmall{
+				border-right:none;
+			}
+			.productImg{
+				height:200px;
+			}
+			.productImg1{
+				background:url(../img/promo_applepay_medium.jpg) no-repeat center center;
+				background-size:640px 200px;
+				@include onsmall{
+					background:url(../img/promo_applepay_small.jpg) no-repeat center center;
+					background-size:736px 200px;
+				}
+			}
+			.productImg2{
+				background:url(../img/public_betas_medium.jpg) no-repeat center center;
+				background-size:640px 200px;
+				@include onsmall{
+					background:url(../img/public_betas_small.jpg) no-repeat center center;
+					background-size:736px 200px;
+				}
+			}
+			.productImg3{
+				background:url(../img/ios10_medium.jpg) no-repeat center center;
+				background-size:640px 200px;
+				@include onsmall{
+					background:url(../img/ios10_small.jpg) no-repeat center center;
+					background-size:736px 200px;
+				}
+
+			}
+			.productImg4{
+				background:#FAFAFA url(../img/hp_tiles_mac_large.jpg) no-repeat center center;
+				background-size:360px 200px;
+			}
+		}
+	}
+}
+.footer{
+	position:relative;
+	left:0;
+	width:100%;
+	min-height:10px;
+	background:#F2F2F2;
+	padding-top:40px;
+	padding-bottom:30px;
+	top:651px;
+	@include onmedium{
+		top:651px;
+	}
+	@include onsmall{
+		top:456px;
+	}
+	.container{
+		@include onlarge{
+			width:1000px;
+		}
+		@include onmedium{
+			width:100%;
+			padding:0 20px;
+		}
+	}
+	.footer_inner{
+		h3{
+			font-family:"MyFont_pro_bold";
+			font-size:12px;
+			font-weight:100;
+			color:#333;
+		}
+		.h3{
+			margin-top:20px;
+		}
+		ul{
+			padding-top:6px;
+		}
+		ul>li>a{
+			font-family:"MyFont_pro_thin";
+			font-size:10px;
+			color:#000;
+			&:hover{
+				text-decoration:underline;
+			}
+		}
+	}
+}
+.footer .footer_small{
+	height:100%;
+	max-width:736px;
+	margin:0 auto;
+	padding:0 30px;
+	cursor:pointer;
+	li{
+		width:100%;
+		border-bottom:1px solid #ccc;
+		position:relative;
+		min-height:44px;
+		height:100%;
+		line-height:44px;
+		.footer_list{
+		    transition:all 3s ease;
+			position:relative;
+			top:-6px;
+			left:0;
+			width:100%;
+			padding:0 20px 10px;
+			overflow:hidden;
+			display:none;
+			a{
+				font-family:"MyFont_pro_text";
+				display:block;
+				width:100%;
+				
+				font-size:10px;
+				line-height:26px;
+				&:hover{
+					text-decoration:underline;
+					font-weight:400;
+				}
+			}
+		}
+		h3{
+			font-family:"MyFont_pro_text";
+			font-weight:400;
+			font-size:14px;
+			display:inline-block;
+			color:#333;
+		}
+		.add{
+			width:43px;
+			height:43px;
+			float:right;
+			position:relative;
+			.heng3{
+				position:absolute;
+				width:11px;
+				height:1px;
+				background:#333;
+				top:21px;
+				left:16px;
+				transition:all 0.3s ease;
+			}
+			.heng4{
+				position:absolute;
+				width:1px;
+				height:11px;
+				background:#333;
+				left:21px;
+				top:16px;
+				transition:all 0.3s ease;
+			}
+		}
+		.add.change{
+			.heng3{
+				transform:rotateZ(45deg);
+			}
+			.heng4{
+				transform:rotateZ(45deg);
+			}
+		}
+	}
+}
+.footer2{
+	position:relative;
+	left:0;
+	width:100%;
+	min-height:10px;
+	background:#f2f2f2;
+	padding-bottom:10px;
+	top:651px;
+	color:#666;
+	@include onmedium{
+		top:651px;
+	}
+	@include onsmall{
+		top:456px;
+	}
+	.container{
+		@include onlarge{
+			width:1000px;
+		}
+		@include onmedium{
+			width:100%;
+			padding:0 20px;
+		}
+		@include onsmall{
+			width:100%;
+			padding:0 30px;
+		}
+		.footer2_text{
+			padding-bottom:2px;
+			font-family:"MyFont_pro_text";
+			font-size:10px;
+			line-height:20px;
+			border-bottom:1px solid #E3E3E3;
+			@include onmedium{
+				border:none;
+			}
+			a{
+				font-family:"MyFont_pro_text";
+				font-size:10px;
+				color:#0088D3;
+				&:hover{
+					text-decoration:underline;
+					color:#333;
+				}
+			}
+		}
+	}
+}
+.footer3{
+	position:relative;
+	left:0;
+	width:100%;
+	background:#f2f2f2;
+	top:651px;
+	color:#fff;
+	@include onmedium{
+		top:651px;
+	}
+	@include onsmall{
+		top:456px;
+	}
+	.container{
+		height:100%;
+		@include onlarge{
+			width:1000px;
+		}
+		@include onmedium{
+			width:100%;
+			padding:0 20px;
+		}
+	}
+}
